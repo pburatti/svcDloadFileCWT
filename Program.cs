@@ -66,6 +66,7 @@ try
         loggerInput.LogInformation($"Richiesta esterna downloadFilecompletata");
         return Results.File(result, contentType: "application/octet-stream", Path.GetFileName(encfileName));
     });
+    app.MapGet("/Alive", () => "Alive!");
 
     app.Run();
 }
