@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Web;
 
 namespace webapi_DLoadFile.Helper
 {
@@ -61,7 +62,7 @@ namespace webapi_DLoadFile.Helper
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseaddr);
-                Uri myuri = new Uri($"{client.BaseAddress}{uncFile}");
+                Uri myuri = new Uri($"{client.BaseAddress}{HttpUtility.UrlEncode(uncFile)}");
 
                 Stream file = await client.GetStreamAsync(myuri).ConfigureAwait(false);
                 await file.CopyToAsync(stream);
